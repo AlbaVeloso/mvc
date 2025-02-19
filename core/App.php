@@ -1,7 +1,7 @@
 <?php
 namespace Formacom\Core;
 class App{
-    protected $controller="Formacom\\Controllers\\HomeController";
+    protected $controller="Formacom\\Controllers\\TareaController";
     protected $method="index";
     protected $params=[];
 
