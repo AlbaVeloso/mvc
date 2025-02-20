@@ -3,21 +3,23 @@ namespace Formacom\Models;
 
 use Illuminate\Database\Eloquent\Model; // Importar la clase base de Eloquent
 
-class Tareas extends Model
+class Contactos extends Model
 {
     // Especifica la tabla que este modelo utilizará (si es diferente del nombre en plural del modelo)
-    protected $table = 'tareas'; // Asegúrate de que el nombre de la tabla sea correcto
+    protected $table = 'contactos'; // Asegúrate de que el nombre de la tabla sea correcto
 
     // Si la tabla tiene una clave primaria diferente (por defecto Eloquent usa 'id')
-    protected $primaryKey = 'id_tarea'; // Si tu tabla usa una clave primaria diferente, defínela aquí.
+    protected $primaryKey = 'id'; // Si tu tabla usa una clave primaria diferente, defínela aquí.
 
     // Si no quieres que Eloquent gestione las marcas de tiempo (created_at, updated_at), ponlo en falso
     public $timestamps = false; // Si no usas marcas de tiempo, ponlo a false.
 
     // Definir qué columnas pueden ser asignadas masivamente (mass assignable)
     protected $fillable = [
-        'titulo', 
-        'descripcion', 
+        'nombre', 
+        'telefono', 
+        'email',
+        'direccion',
         'fecha_creacion', 
     ];
 

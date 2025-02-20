@@ -94,12 +94,6 @@ table {
 
 }
 
-.nueva {
-    color: black;
-    margin-left: 160px;
-    text-wrap: wrap;
-}
-
 form {
     display: block;
     background-color: #fff;
@@ -109,9 +103,6 @@ form {
     width: 80%;
     margin: auto;
     margin-top: 20px;
-
-
-
 }
 label {
     font-size: 20px;
@@ -151,7 +142,18 @@ button[type="submit"]:hover {
 }
 
 .edit {
-    width: 100%;
+    width: 90%;
+}
+
+.nueva {
+    color: black;
+    margin-left: 88px;
+    text-wrap: wrap;
+    width: 80%;
+}
+div {
+width: 66%;
+
 }
 
 @media (max-width: 600px) {

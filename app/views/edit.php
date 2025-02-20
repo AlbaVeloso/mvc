@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Tarea</title>
+    <title>Editar Contacto</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>css/style.css">
 </head>
 <body>
     <header>
-        <h1>Editar Tarea</h1>
-        <a href="/AppTareas">Volver a la lista de tareas</a> <!-- Enlace para volver a la lista -->
+        <h1>Editar Contacto</h1>
+        <a href="/Agenda">Volver a la lista de contactos</a> 
     </header>
 
     <main>
-        <!-- Mostrar el formulario de edición con los datos de la tarea -->
-        <form class="edit" method="POST" action="/apptareas/tarea/update/<?php echo $tarea->id_tarea; ?>">
-            <label class="edit" for="title">Título:</label>
-            <input class="edit" type="text" id="title" name="title" value="<?php echo htmlspecialchars($tarea->title); ?>" required>
+        <form class="edit" method="POST" action="/Agenda/contactos/update/<?php echo $contacto->id; ?>">
+            <label class="edit" for="name">Nombre:</label>
+            <input class="edit" type="text" id="name" name="nombre" value="<?php echo htmlspecialchars($contacto->nombre); ?>" required>
 
-            <label class="edit" for="descripcion">Descripción:</label>
-            <textarea class="edit" id="descripcion" name="descripcion" required><?php echo htmlspecialchars($tarea->descripcion); ?></textarea>
+            <label class="edit" for="telefono">Teléfono:</label>
+            <input class="edit" type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($contacto->telefono); ?>" required>
+
+            <label class="edit" for="email">Email:</label>
+            <input class="edit" type="text" id="email" name="email" value="<?php echo htmlspecialchars($contacto->email); ?>" required>
+
+            <label class="edit" for="direccion">Dirección:</label>
+            <textarea class="edit" id="direccion" name="direccion" required><?php echo htmlspecialchars($contacto->direccion); ?></textarea>
 
             <label class="edit" for="fecha_creacion">Fecha de creación:</label>
-            <input class="edit" type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo htmlspecialchars($tarea->fecha_creacion); ?>" required>
+            <input class="edit" type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo htmlspecialchars($contacto->fecha_creacion); ?>" required>
 
-            <button class="edit" type="submit">Actualizar tarea</button>
+            <button class="edit" type="submit">Actualizar contacto</button>
         </form>
     </main>
 </body>

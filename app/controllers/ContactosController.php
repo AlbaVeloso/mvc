@@ -1,21 +1,17 @@
 <?php
 namespace Formacom\Controllers;
 use Formacom\Core\Controller;
-use Formacom\models\Tareas;
+use Formacom\models\Contactos;
 
-class TareaController extends Controller{
-       public function index(...$params)
-    {
-        // Llamamos a la función listarTareas para obtener las tareas
-        $tareas = Tareas::all();
-
-        // Pasamos las tareas a la vista 'home'
-        $data = ['tareas' => $tareas];
-        $this->view('tarea_list', $data);
+class ContactosController extends Controller{
+       public function index(...$params)    {
+        
+        $contacto = Contactos::all();
+        
+        $data = ['contactos' => $contacto];
+        $this->view('agenda', $data);
     }
 
-
-    // Método para cargar la vista (esto depende de tu implementación de vistas)
     public function view($view, $data = [])
     {
         extract($data);
@@ -26,23 +22,27 @@ class TareaController extends Controller{
         // Verificar si se ha enviado el formulario (si existen datos en $_POST)
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Obtener los datos del formulario
-            $title = $_POST['title'] ?? null;
-            $descripcion = $_POST['descripcion'] ?? null;
+            $nombre = $_POST['nombre'] ?? null;
+            $telefono = $_POST['telefono'] ?? null;
+            $email = $_POST['email'] ?? null;
+            $direccion = $_POST['direccion'] ?? null;
             $fecha_creacion = $_POST['fecha_creacion'] ?? null;
 
             // Validar los datos
-            if ($title && $descripcion && $fecha_creacion) {
+            if ($nombre && $telefono && $email && $direccion && $fecha_creacion) {
                 // Crear una nueva tarea usando Eloquent
-                $tarea = new Tareas ();
-                $tarea->title = $title;
-                $tarea->descripcion = $descripcion;
-                $tarea->fecha_creacion = $fecha_creacion;
+                $contacto = new Contactos ();
+                $contacto->nombre = $nombre;
+                $contacto->telefono = $telefono;
+                $contacto->email = $email;
+                $contacto->direccion = $direccion;
+                $contacto->fecha_creacion = $fecha_creacion;
 
                 // Guardar la tarea en la base de datos
-                $tarea->save();
+                $contacto->save();
 
                 // Redirigir a la lista de tareas o mostrar un mensaje de éxito
-                header('Location: /AppTareas/'); // O la ruta que prefieras
+                header('Location: /Agenda/'); // O la ruta que prefieras
                 exit();
             } 
 
@@ -51,50 +51,54 @@ class TareaController extends Controller{
             $this->view('new');
         }
     }
-    public function edit($id_tarea)
+    public function edit($id)
     {
         // Buscar la tarea por su ID
-        $tarea = Tareas::find($id_tarea);
+        $contacto = Contactos::find($id);
 
         // Verificar si la tarea existe
-        if ($tarea) {
+        if ($contacto) {
             // Si existe, pasar los datos a la vista 'edit' (formulario de edición)
-            $this->view('edit', ['tarea' => $tarea]);
+            $this->view('edit', ['contacto' => $contacto]);
         } else {
             // Si no existe la tarea, redirigir a la lista de tareas o mostrar un mensaje de error
-            header('Location: /AppTareas/');
+            header('Location: /Agenda/');
             exit();
         }
     }
 
     // Método para procesar la actualización de una tarea
-    public function update($id_tarea)
+    public function update($id)
     {
         // Buscar la tarea por su ID
-        $tarea = Tareas::find($id_tarea);
+        $contacto = Contactos::find($id);
 
 
         // Verificar si la tarea existe
-        if ($tarea) {
+        if ($contacto) {
             // Verificar si se ha enviado el formulario
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Obtener los datos del formulario
-                $title = $_POST['title'] ?? null;
-                $descripcion = $_POST['descripcion'] ?? null;
-                $fecha_creacion = $_POST['fecha_creacion'] ?? null;
+                $nombre = $_POST['nombre'] ?? null;
+                $telefono = $_POST['telefono'] ?? null;
+                $email = $_POST['email'] ?? null;
+                $direccion = $_POST['direccion'] ?? null;
+                $fecha_creacion = $_POST['fecha_creacion'] ?? null;    
 
                 // Validar los datos
-                if ($title && $descripcion && $fecha_creacion) {
+                if ($nombre && $telefono && $email && $direccion && $fecha_creacion) {
                     // Actualizar los campos de la tarea
-                    $tarea->title = $title;
-                    $tarea->descripcion = $descripcion;
-                    $tarea->fecha_creacion = $fecha_creacion;
+                    $contacto->nombre = $nombre;
+                    $contacto->telefono = $telefono;
+                    $contacto->email = $email;
+                    $contacto->direccion = $direccion;
+                    $contacto->fecha_creacion = $fecha_creacion;
 
                     // Guardar los cambios en la base de datos
-                    $tarea->save();
+                    $contacto->save();
 
                     // Redirigir a la lista de tareas
-                    header('Location: /AppTareas/');
+                    header('Location: /Agenda/');
                     exit();
                 } else {
                     // Si los datos no son válidos, puedes enviar un mensaje de error o hacer otra acción
@@ -103,26 +107,23 @@ class TareaController extends Controller{
             }
         } else {
             // Si no existe la tarea, redirigir a la lista de tareas
-            header('Location: /AppTareas/');
+            header('Location: /Agenda/');
             exit();
         }
     }
-    public function delete($id_tarea)
-{
-    // Buscar la tarea por su ID
-    $tarea = Tareas::find($id_tarea);
-
-    // Verificar si la tarea existe
-    if ($tarea) {
+    public function delete($id){
+    
+    $contacto = Contactos::find($id);
+  
+    if ($contacto) {
         // Eliminar la tarea de la base de datos
-        $tarea->delete();
+        $contacto->delete();
 
-        // Redirigir a la lista de tareas
-        header('Location: /AppTareas/');
+        header('Location: /Agenda/contactos/agenda/');
         exit();
     } else {
         // Si no existe la tarea, redirigir a la lista de tareas o mostrar un mensaje de error
-        header('Location: /AppTareas/');
+        header('Location: /Agenda/contactos/agenda/');
         exit();
     }
 }

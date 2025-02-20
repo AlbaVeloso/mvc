@@ -1,7 +1,7 @@
 <?php
 namespace Formacom\Core;
 class App{
-    protected $controller="Formacom\\Controllers\\TareaController";
+    protected $controller="Formacom\\Controllers\\ContactosController";
     protected $method="index";
     protected $params=[];
 
@@ -32,7 +32,7 @@ class App{
         if(isset($_GET['url'])) {
             return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
-        return ['tarea_list','index'];
+        return ['agenda','index'];
     }
 }
 ?>
